@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.petshop.OnlinePetShopApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.408 s - in com.petshop.OnlinePetShopApplicationTests
