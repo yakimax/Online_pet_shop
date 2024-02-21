@@ -1,51 +1,51 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState, useEffect } from "react" ;
+import axios from "axios" ;
+import React from "react" ;
+import { useNavigate } from "react-router-dom" ;
+import { toast } from "react-toastify" ;
 
 const ViewMyCart = () => {
-  let user = JSON.parse(sessionStorage.getItem("active-customer"));
+  let user = JSON.parse(sessionStorage.getItem("active-customer")) ;
 
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken") ;
 
-  const [carts, setCarts] = useState([]);
-  const [cartAmount, setCartAmount] = useState("0.0");
+  const [carts, setCarts] = useState([]) ;
+  const [cartAmount, setCartAmount] = useState("0.0") ;
 
-  const [productCart, setProductCart] = useState({});
+  const [productCart, setProductCart] = useState({}) ;
 
-  let navigate = useNavigate();
+  let navigate = useNavigate() ;
 
   useEffect(() => {
     const getAllCart = async () => {
-      const allCart = await retrieveCart();
+      const allCart = await retrieveCart() ;
       if (allCart) {
-        setCarts(allCart.carts);
+        setCarts(allCart.carts) ;
 
         if (allCart.totalCartAmount) {
-          setCartAmount(allCart.totalCartAmount);
+          setCartAmount(allCart.totalCartAmount) ;
         }
       }
-    };
+    } ;
 
-    getAllCart();
-  }, []);
+    getAllCart( ) ;
+  }, []) ;
 
   const retrieveCart = async () => {
     const response = await axios.get(
-      "http://localhost:8088/api/cart/fetch?userId=" + user.id,
+      "http://localhost:8088/api/cart/fetch?userId=" + user.id ,
       {
         headers: {
           Authorization: "Bearer " + customer_jwtToken, // Replace with your actual JWT token
         },
       }
-    );
-    console.log(response.data);
-    return response.data;
-  };
+    ) ;
+    console.log(response.data) ;
+    return response.data ;
+  } ;
 
   const deleteCart = (cartId, e) => {
-    const data = { id: cartId, userId: user.id };
+    const data = { id: cartId, userId: user.id } ;
     fetch("http://localhost:8088/api/cart/delete", {
       method: "DELETE",
       headers: {
@@ -66,41 +66,41 @@ const ViewMyCart = () => {
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            }) ;
 
             setTimeout(() => {
-              window.location.reload(true);
+              window.location.reload(true) ;
             }, 1000); // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+              position: "top-center" ,
+              autoClose: 1000 ,
+              hideProgressBar: false ,
+              closeOnClick: true ,
+              pauseOnHover: true ,
+              draggable: true ,
+              progress: undefined ,
+            }) ;
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true) ;
+            }, 1000) ; // Redirect after 3 seconds
           }
-        });
+        }) ;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error) ;
         toast.error("It seems server is down", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+          position: "top-center" ,
+          autoClose: 1000 ,
+          hideProgressBar: false ,
+          closeOnClick: true ,
+          pauseOnHover: true ,
+          draggable: true ,
+          progress: undefined ,
+        }) ;
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
+          window.location.reload(true) ;
+        }, 1000) ; // Redirect after 3 seconds
       });
   };
 

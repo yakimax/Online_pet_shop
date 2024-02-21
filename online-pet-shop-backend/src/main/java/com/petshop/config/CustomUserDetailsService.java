@@ -14,7 +14,7 @@ import com.petshop.utility.Constants.UserStatus;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserService userService;
+	private UserService userService ;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

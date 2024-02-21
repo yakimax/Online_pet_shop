@@ -50,5 +50,4 @@ public class CartController {
 	public ResponseEntity<CartResponseDto> fetchUserCart(@RequestParam("userId") int userId) {
 		return cartResource.fetchUserCartDetails(userId);
 	}
-
 }
